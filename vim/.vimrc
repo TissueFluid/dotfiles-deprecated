@@ -205,8 +205,6 @@ let g:syntastic_c_config_file = '.syntastic_c_config'
 
 Bundle 'godlygeek/tabular'
 
-Bundle 'DrawIt'
-
 Bundle 'PapayaWhip'
 " a theme
 
