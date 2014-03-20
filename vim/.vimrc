@@ -10,8 +10,39 @@ call vundle#rc()
 " let Vundle manage Vundle
 Bundle 'gmarik/Vundle.vim'
 
+Bundle 'luochen1990/rainbow'
+let g:rainbow_active = 1
+let g:rainbow_conf = {
+\   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+\   'ctermfgs': ['darkgray', 'darkblue', 'darkmagenta', 'darkcyan'],
+\   'operators': '_,_',
+\   'parentheses': [['(',')'], ['\[','\]'], ['{','}']],
+\   'separately': {
+\       '*': {},
+\       'lisp': {
+\           'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+\           'ctermfgs': ['darkgray', 'darkblue', 'darkmagenta', 'darkcyan', 'darkred', 'darkgreen'],
+\       },
+\       'html': {
+\           'parentheses': [['(',')'], ['\[','\]'], ['{','}'], ['<\a[^>]*[^/]>\|<\a>','</[^>]*>']],
+\       },
+\       'tex': {
+\           'operators': '',
+\           'parentheses': [['(',')'], ['\[','\]']],
+\       },
+\   }
+\}
+Bundle 'Shougo/vimproc.vim'
+Bundle 'osyo-manga/vim-reunions'
+Bundle 'osyo-manga/vim-marching'
+let g:marching_clang_command = '/usr/bin/clang'
+let g:marching_include_paths = [
+      \ "/usr/include/c++",
+      \ "/usr/local/include/boost"
+      \]
+let g:marching_enable_neocomplete = 1
+
 " >>> My Bundles here:
-Bundle 'asmx86_64'
 Bundle 'bling/vim-airline'
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
@@ -56,16 +87,11 @@ let Tlist_Use_Right_Window = 1
 let Tlist_Show_One_File = 1
 let Tlist_Auto_Open = 1
 
-Bundle 'Rip-Rip/clang_complete'
-let g:clang_complete_auto = 0
-let g:clang_auto_select = 0
-let g:clang_library_path = '/Library/Developer/CommandLineTools/usr/lib/'
-" let g:clang_use_library = 1
 
 
 Bundle 'nsf/gocode', {'rtp': 'vim'}
 autocmd BufWritePre *.go Fmt
-autocmd FileType go setlocal makeprg=go\ run\ %
+" autocmd FileType go setlocal makeprg=go\ run\ %
 
 Bundle 'Shougo/neocomplete.vim'
 " Use neocomplete.
@@ -142,25 +168,14 @@ if !exists('g:neocomplete#sources#omni#input_patterns')
   let g:neocomplete#sources#omni#input_patterns = {}
 endif
 "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+let g:neocomplete#sources#omni#input_patterns.c =
+      \ '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?'
+let g:neocomplete#sources#omni#input_patterns.cpp =
+      \ '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
 
 " For perlomni.vim setting.
 " https://github.com/c9s/perlomni.vim
 " let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
-
-if !exists('g:neocomplete#force_omni_input_patterns')
-  let g:neocomplete#force_omni_input_patterns = {}
-endif
-let g:neocomplete#force_overwrite_completefunc = 1
-let g:neocomplete#force_omni_input_patterns.c =
-      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
-let g:neocomplete#force_omni_input_patterns.cpp =
-      \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
-" let g:neocomplete#force_omni_input_patterns.objc =
-"       \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
-" let g:neocomplete#force_omni_input_patterns.objcpp =
-"       \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
 
 
 Bundle 'Shougo/neosnippet.vim'
@@ -186,7 +201,7 @@ endif
 
 Bundle 'scrooloose/syntastic'
 let g:syntastic_check_on_open=1
-" let g:syntastic_check_on_wq=0
+let g:syntastic_check_on_wq=0
 let g:syntastic_enable_signs=1
 let g:syntastic_error_symbol='✗'
 let g:syntastic_warning_symbol='⚠'
