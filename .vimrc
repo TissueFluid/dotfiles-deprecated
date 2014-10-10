@@ -1,3 +1,9 @@
+" Function Key
+"   <F8>    Toggle Tarbar
+"   <F9>    Toggle Syntastic
+"   <F10>   Toggle Paste Mode
+
+
 " +----------------------+
 " | Bundle configuration |
 " +----------------------+
@@ -5,12 +11,22 @@ set nocompatible  " disable vi compatibility
 filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim/
-call vundle#rc()
+set rtp+=/usr/local/opt/go/libexec/misc/vim
+set rtp+=/Users/zzy/Programs/vim_plugins/tmux.vim
+
+call vundle#begin()
 
 " let Vundle manage Vundle
-Bundle 'gmarik/Vundle.vim'
+Plugin 'gmarik/Vundle.vim'
 
-Bundle 'luochen1990/rainbow'
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
+Plugin 'dgryski/vim-godef'
+autocmd FileType go autocmd BufWritePre <buffer> Fmt
+
+Plugin 'rizzatti/dash.vim'
+Plugin 'LaTeX-Box-Team/LaTeX-Box'
+
+Plugin 'luochen1990/rainbow'
 let g:rainbow_active = 1
 let g:rainbow_conf = {
 \   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
@@ -32,69 +48,59 @@ let g:rainbow_conf = {
 \       },
 \   }
 \}
-Bundle 'Shougo/vimproc.vim'
-Bundle 'osyo-manga/vim-reunions'
-Bundle 'osyo-manga/vim-marching'
-let g:marching_clang_command = '/usr/bin/clang'
-let g:marching_include_paths = [
-      \ "/usr/include/c++",
-      \ "/usr/local/include/boost"
-      \]
-let g:marching_enable_neocomplete = 1
-
-" >>> My Bundles here:
-Bundle 'bling/vim-airline'
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-let g:airline_left_sep = ''
-let g:airline_left_alt_sep = ''
-let g:airline_right_sep = ''
-let g:airline_right_alt_sep = ''
-let g:airline_symbols.branch = ''
-let g:airline_symbols.readonly = ''
-let g:airline_symbols.linenr = ''
-
-let g:airline#extensions#bufferline#enabled = 0
-let g:airline#extensions#branch#enabled = 0
-let g:airline#extensions#syntastic#enabled = 0
-let g:airline#extensions#tagbar#enabled = 0
-let g:airline#extensions#csv#enabled = 0
-let g:airline#extensions#hunks#enabled = 0
-let g:airline#extensions#ctrlp#enabled = 0
-let g:airline#extensions#virtualenv#enabled = 0
-let g:airline#extensions#eclim#enabled = 0
-let g:airline#extensions#whitespace#enabled = 0
-" let g:airline#extensions#whitespace#symbol = '!'
-" let g:airline#extensions#whitespace#show_message = 1
-" let g:airline#extensions#whitespace#checks = [ 'indent', 'trailing' ]
-" let g:airline#extensions#whitespace#trailing_format = 'trailing[%s]'
-" let g:airline#extensions#whitespace#mixed_indent_format = 'mixed-indent[%s]'
-let g:airline#extensions#tabline#enabled = 0
 
 
-Bundle 'FencView.vim'
-Bundle 'tomtom/tcomment_vim'
-Bundle 'mru.vim'
-Bundle '256-jungle'
-Bundle 'scrooloose/nerdtree'
-
-Bundle 'taglist.vim'
-let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
-let Tlist_Auto_Highlight_Tag = 1
-let Tlist_Exit_OnlyWindow = 1
-let Tlist_Use_Right_Window = 1
-let Tlist_Show_One_File = 1
-let Tlist_Auto_Open = 1
+Plugin 'tomtom/tcomment_vim'
+Plugin 'mru.vim'
+Plugin '256-jungle'
+Plugin 'scrooloose/nerdtree'
+Plugin 'FencView.vim'
+Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 
 
+Plugin 'majutsushi/tagbar'
+map <F8> <ESC>:Tagbar<CR>
+" autocmd FileType * nested :call tagbar#autoopen(0)
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : '/Users/zzy/Documents/Projects/go/bin/gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
 
-Bundle 'nsf/gocode', {'rtp': 'vim'}
-autocmd BufWritePre *.go Fmt
-" autocmd FileType go setlocal makeprg=go\ run\ %
+" Plugin 'taglist.vim'
+" let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
+" let Tlist_Auto_Highlight_Tag = 1
+" let Tlist_Exit_OnlyWindow = 1
+" let Tlist_Use_Right_Window = 1
+" let Tlist_Show_One_File = 1
+" let Tlist_Auto_Open = 1
 
-Bundle 'Shougo/neocomplete.vim'
-" Use neocomplete.
+
+Plugin 'Rip-Rip/clang_complete'
+
+Plugin 'Shougo/neocomplete.vim'
 let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
 let g:neocomplete#enable_smart_case = 1
@@ -157,29 +163,48 @@ inoremap <expr><C-e>  neocomplete#cancel_popup()
 "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
 " Enable omni completion.
-" autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-" autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-" autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-" autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 
 " Enable heavy omni completion.
 if !exists('g:neocomplete#sources#omni#input_patterns')
   let g:neocomplete#sources#omni#input_patterns = {}
 endif
 "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
-let g:neocomplete#sources#omni#input_patterns.c =
-      \ '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?'
-let g:neocomplete#sources#omni#input_patterns.cpp =
-      \ '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
 
 " For perlomni.vim setting.
 " https://github.com/c9s/perlomni.vim
-" let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
+
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#force_overwrite_completefunc = 1
+let g:neocomplete#force_omni_input_patterns.c =
+      \ '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?'
+let g:neocomplete#force_omni_input_patterns.cpp =
+      \ '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
+" let g:neocomplete#force_omni_input_patterns.c =
+"       \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
+" let g:neocomplete#force_omni_input_patterns.cpp =
+"       \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+" let g:neocomplete#force_omni_input_patterns.objc =
+"       \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
+" let g:neocomplete#force_omni_input_patterns.objcpp =
+"       \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+let g:clang_complete_auto = 0
+let g:clang_auto_select = 0
+"let g:clang_use_library = 1
+let g:clang_library_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
 
 
-Bundle 'Shougo/neosnippet.vim'
-Bundle 'Shougo/neosnippet-snippets'
+Plugin 'Shougo/neosnippet.vim'
+Plugin 'Shougo/neosnippet-snippets'
 " Plugin key-mappings.
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -198,8 +223,7 @@ if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
 
-
-Bundle 'scrooloose/syntastic'
+Plugin 'scrooloose/syntastic'
 let g:syntastic_check_on_open=1
 let g:syntastic_check_on_wq=0
 let g:syntastic_enable_signs=1
@@ -218,24 +242,22 @@ let g:syntastic_c_config_file = '.syntastic_c_config'
 
 
 
-Bundle 'godlygeek/tabular'
+Plugin 'godlygeek/tabular'
 
-Bundle 'PapayaWhip'
+Plugin 'PapayaWhip'
 " a theme
 
-Bundle 'DoxygenToolkit.vim'
+Plugin 'DoxygenToolkit.vim'
 
 
-Bundle 'VimIM'
-let g:vimim_map='c-bslash'
+Plugin 'mattn/emmet-vim'
 
-Bundle 'mattn/emmet-vim'
+Plugin 'jiangmiao/auto-pairs'
 
-Bundle 'jiangmiao/auto-pairs'
+Plugin 'brookhong/cscope.vim'
 
-Bundle 'a.vim'
-
-Bundle 'brookhong/cscope.vim'
+call vundle#end()
+filetype plugin indent on
 
 " +---------+
 " | Options |
@@ -243,7 +265,6 @@ Bundle 'brookhong/cscope.vim'
 
 " General
 syntax on
-filetype plugin indent on
 set history=256
 set autowrite  " Writes on make/shell commands
 set autoread
@@ -271,17 +292,21 @@ set wildmode=longest,list
 " Formatting
 set backspace=indent,eol,start
 
-set tabstop=2
-set softtabstop=2
-set shiftwidth=2
-set expandtab
-set smarttab
-" set textwidth=78
-autocmd FileType make setlocal noexpandtab
+if !(&filetype=='tex' || &filetype=='plaintex' || &filetype=='make')
+  set tabstop=2
+  set softtabstop=2
+  set shiftwidth=2
+  set expandtab
+  set smarttab
+endif
+
 autocmd FileType markdown setlocal shiftwidth=4 tabstop=4 softtabstop=4
+autocmd FileType text,go setlocal textwidth=78 wrap
+autocmd FileType text setlocal spell
 
 set autoindent
 set cindent
+set smartindent
 " set cinoptions=
 " set cinwords=
 
@@ -308,13 +333,17 @@ set mousehide
 set splitbelow
 set splitright
 
-set guifont=Monaco\ for\ Powerline\ for\ Powerline:h13
+set cursorline
+
+set guifont=Monaco\ for\ Powerline:h13
 
 if has('gui_running')
   colorscheme PapayaWhip
 else
   colorscheme 256-jungle
 endif
+
+hi cursorline cterm=NONE ctermbg=black ctermfg=NONE guibg=yellow guifg=NONE
 
 
 autocmd BufNewFile,BufRead *.m setlocal ft=objc
