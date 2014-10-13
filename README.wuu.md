@@ -1,12 +1,10 @@
 # dotfiles
 
-Backup my powerful, gorgeous configuration files. 
+拿我儂嗰弗得了靈嗰配置文件囥在居𡍲。
 
-Other Languages: [Wu Chinese（吳語）](https://github.com/TissueFluid/dotfiles/blob/master/README.wuu.md)
+## Vim嗰配置
 
-## Vim Configuration
-
-#### Plugins I use
+#### 我儂用嗰插件
 
 ```vim
 Plugin 'gmarik/Vundle.vim'
@@ -35,32 +33,32 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'brookhong/cscope.vim'
 ```
 
-#### Main features
+#### 頂大嗰特點
 
-* Write and browse code fast
-* Comment code easily
-* Syntax checking
-* Auto detect file encoding
-* Good looking and seductive
+* 代碼寫搭瀏覽起來儕蠻快
+* 註釋代碼方便
+* 語法檢查
+* 自動檢測文件編碼方式
+* 洋氣
 
-## Zsh Configuration
+## Zsh嗰配置
 
-I use a configuration framework [Prezto](https://github.com/sorin-ionescu/prezto).
+我儂用嗰別人家的配置框架——[Prezto](https://github.com/sorin-ionescu/prezto).
 
-## Tmux Configuration
+## Tmux嗰配置
 
-I use the following things to make my tmux panel seductive:
+我儂用嗰居兩只家生，然後我儂嗰tmux望起來就弗得了洋氣。
 
 * [Lokaltog/powerline](https://github.com/Lokaltog/powerline)
 * [thewtex/tmux-mem-cpu-load](https://github.com/thewtex/tmux-mem-cpu-load)
 
-## My stuff
+## 我儂自家嗰物事
 
-### My shell scripts
+### 我儂嗰shell腳本
 
-* `alias.sh`: Some command alias
-* `custom.sh`: Some environment variables
-* `functions.sh`: Useless
-* `cow.sh`: Randomly speak by cowsay
-* `pony.sh`: Randomly speak by ponysay
-* `cow_or_pony.sh`: Randomly speak by cowsay or ponysay = =
+* `alias.sh`: 命令嗰別名
+* `custom.sh`: 環境變量
+* `functions.sh`: 嘸畀用嗰物事
+* `cow.sh`: 用cowsay隨機講一句閒話
+* `pony.sh`: 用ponysay隨機講一句閒話
+* `cow_or_pony.sh`: 用cowsay或ponysay隨機講一句閒話 = =
