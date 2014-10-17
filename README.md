@@ -56,7 +56,7 @@ I use the following things to make my tmux panel seductive:
 
 ## My stuff
 
-### My shell scripts
+#### My shell scripts
 
 * `alias.sh`: Some command alias
 * `custom.sh`: Some environment variables

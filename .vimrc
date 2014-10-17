@@ -1,8 +1,8 @@
 " Function Key
+"   <F7>    Toggle NERDTree
 "   <F8>    Toggle Tarbar
 "   <F9>    Toggle Syntastic
 "   <F10>   Toggle Paste Mode
-
 
 " +----------------------+
 " | Bundle configuration |
@@ -54,13 +54,67 @@ Plugin 'tomtom/tcomment_vim'
 Plugin 'mru.vim'
 Plugin '256-jungle'
 Plugin 'scrooloose/nerdtree'
-Plugin 'FencView.vim'
-Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
+map <F7> <ESC>:NERDTreeToggle<CR>
 
+Plugin 'FencView.vim'
+
+Plugin 'tpope/vim-fugitive'
+
+Plugin 'itchyny/lightline.vim'
+let g:lightline = {
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+      \ },
+      \ 'component': {
+      \   'lineinfo': ' %3l:%-2v',
+      \ },
+      \ 'component_function': {
+      \   'readonly': 'MyReadonly',
+      \   'fugitive': 'MyFugitive',
+      \   'filename': 'MyFilename'
+      \ },
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '', 'right': '' }
+      \ }
+function! MyReadonly()
+  return &readonly ? '' : ''
+endfunction
+
+function! MyModified()
+  return &ft =~ 'help\|vimfiler' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! MyFilename()
+  return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+        \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+        \  &ft == 'unite' ? unite#get_status_string() :
+        \  &ft == 'vimshell' ? vimshell#get_status_string() :
+        \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+        \ ('' != MyModified() ? ' ' . MyModified() : '')
+endfunction
+
+function! MyFugitive()
+  if exists("*fugitive#head")
+    let _ = fugitive#head()
+    return strlen(_) ? ''._ : ''
+  endif
+  return ''
+endfunction
+
+Plugin 'edkolev/tmuxline.vim'
+ let g:tmuxline_preset = {
+      \'a'    : '#S',
+      \'c'    : ['#(whoami)', '#(uptime  | cut -d " " -f 1,2,3)'],
+      \'win'  : ['#I', '#W'],
+      \'cwin' : ['#I', '#W', '#F'],
+      \'x'    : '#(date)',
+      \'y'    : ['%R', '%a', '%Y'],
+      \'z'    : '#H'}
 
 Plugin 'majutsushi/tagbar'
 map <F8> <ESC>:Tagbar<CR>
 " autocmd FileType * nested :call tagbar#autoopen(0)
+autocmd VimEnter * nested :call tagbar#autoopen(1)
 let g:tagbar_type_go = {
     \ 'ctagstype' : 'go',
     \ 'kinds'     : [
@@ -97,8 +151,19 @@ let g:tagbar_type_go = {
 " let Tlist_Show_One_File = 1
 " let Tlist_Auto_Open = 1
 
+Plugin 'Shougo/vimproc.vim'
+Plugin 'Shougo/vimshell.vim'
 
-Plugin 'Rip-Rip/clang_complete'
+Plugin 'osyo-manga/vim-marching'
+let g:marching_include_paths = [
+      \ "/usr/include/c++/4.2.1",
+      \ "/usr/local/include/boost"
+      \ ]
+let g:marching_enable_neocomplete = 1
+
+" imap <buffer> <C-x><C-o> <Plug>(marching_start_omni_complete)
+" imap <buffer> <C-x><C-x><C-o> <Plug>(marching_force_start_omni_complete)
+
 
 Plugin 'Shougo/neocomplete.vim'
 let g:neocomplete#enable_at_startup = 1
@@ -252,7 +317,7 @@ Plugin 'DoxygenToolkit.vim'
 
 Plugin 'mattn/emmet-vim'
 
-Plugin 'jiangmiao/auto-pairs'
+" Plugin 'jiangmiao/auto-pairs'
 
 Plugin 'brookhong/cscope.vim'
 
@@ -302,7 +367,7 @@ endif
 
 autocmd FileType markdown setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd FileType text,go setlocal textwidth=78 wrap
-autocmd FileType text setlocal spell
+" autocmd FileType text setlocal spell
 
 set autoindent
 set cindent

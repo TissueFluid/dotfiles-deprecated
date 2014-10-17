@@ -43,7 +43,7 @@ Plugin 'brookhong/cscope.vim'
 
 ## Zsh嗰配置
 
-我儂用嗰別人家的配置框架——[Prezto](https://github.com/sorin-ionescu/prezto).
+我儂用嗰別人家嗰配置框架[Prezto](https://github.com/sorin-ionescu/prezto)。
 
 ## Tmux嗰配置
 
@@ -54,7 +54,7 @@ Plugin 'brookhong/cscope.vim'
 
 ## 我儂自家嗰物事
 
-### 我儂嗰shell腳本
+#### 我儂嗰shell腳本
 
 * `alias.sh`: 命令嗰別名
 * `custom.sh`: 環境變量
