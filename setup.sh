@@ -1,6 +1,6 @@
 #!/bin/bash
 
-setup_items=('.vimrc' '.tmux.conf' '.my_shell_scripts' '.emacs.d')
+setup_items=('.vimrc' '.tmux.conf' '.my_shell_scripts')
 
 for item in ${setup_items[@]}; do
   if [ -e "$HOME/$item" ]; then
