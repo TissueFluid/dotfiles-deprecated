@@ -1,171 +1,81 @@
 " Function Key
-"   <F7>    Toggle NERDTree
-"   <F8>    Toggle Tarbar
-"   <F9>    Toggle Syntastic
-"   <F10>   Toggle Paste Mode
+"   <F7>  -  Toggle nerdtree
+"   <F8>  -  Toggle tagbar
+"   <F9>  -  Toggle Syntastic
+"   <F10> -  Toggle Paste Mode
+
 
 " +----------------------+
-" | Bundle configuration |
+" | Vundle configuration |
 " +----------------------+
-set nocompatible  " disable vi compatibility
+
+set nocompatible
 filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim/
-set rtp+=/usr/local/opt/go/libexec/misc/vim
-set rtp+=/Users/zzy/Programs/vim_plugins/tmux.vim
-
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-" let Vundle manage Vundle
+" Let Vundle manage Vundle
 Plugin 'gmarik/Vundle.vim'
 
-Plugin 'nsf/gocode', {'rtp': 'vim/'}
-Plugin 'dgryski/vim-godef'
-autocmd FileType go autocmd BufWritePre <buffer> Fmt
+" Color scheme
+Plugin 'altercation/vim-colors-solarized'
 
-Plugin 'rizzatti/dash.vim'
-Plugin 'LaTeX-Box-Team/LaTeX-Box'
+" Shougo series
+Plugin 'Shougo/neocomplete.vim'
+Plugin 'Shougo/neosnippet.vim'
+Plugin 'Shougo/neosnippet-snippets'
+Plugin 'Shougo/vimproc'
+Plugin 'Shougo/vimshell'
 
-Plugin 'luochen1990/rainbow'
-let g:rainbow_active = 1
-let g:rainbow_conf = {
-\   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
-\   'ctermfgs': ['darkgray', 'darkblue', 'darkmagenta', 'darkcyan'],
-\   'operators': '_,_',
-\   'parentheses': [['(',')'], ['\[','\]'], ['{','}']],
-\   'separately': {
-\       '*': {},
-\       'lisp': {
-\           'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
-\           'ctermfgs': ['darkgray', 'darkblue', 'darkmagenta', 'darkcyan', 'darkred', 'darkgreen'],
-\       },
-\       'html': {
-\           'parentheses': [['(',')'], ['\[','\]'], ['{','}'], ['<\a[^>]*[^/]>\|<\a>','</[^>]*>']],
-\       },
-\       'tex': {
-\           'operators': '',
-\           'parentheses': [['(',')'], ['\[','\]']],
-\       },
-\   }
-\}
-
-
+" make comments
 Plugin 'tomtom/tcomment_vim'
-Plugin 'mru.vim'
-Plugin '256-jungle'
-Plugin 'scrooloose/nerdtree'
-map <F7> <ESC>:NERDTreeToggle<CR>
 
+" toolbar
+Plugin 'scrooloose/nerdtree'
+Plugin 'majutsushi/tagbar'
+
+" Looking
+Plugin 'luochen1990/rainbow'
+Plugin 'tpope/vim-fugitive'
+Plugin 'itchyny/lightline.vim'
+Plugin 'Yggdroot/indentLine'
+
+" Encoding autodetect
 Plugin 'FencView.vim'
 
-Plugin 'tpope/vim-fugitive'
-
-Plugin 'itchyny/lightline.vim'
-let g:lightline = {
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
-      \ },
-      \ 'component': {
-      \   'lineinfo': ' %3l:%-2v',
-      \ },
-      \ 'component_function': {
-      \   'readonly': 'MyReadonly',
-      \   'fugitive': 'MyFugitive',
-      \   'filename': 'MyFilename'
-      \ },
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' }
-      \ }
-function! MyReadonly()
-  return &readonly ? '' : ''
-endfunction
-
-function! MyModified()
-  return &ft =~ 'help\|vimfiler' ? '' : &modified ? '+' : &modifiable ? '' : '-'
-endfunction
-
-function! MyFilename()
-  return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
-        \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
-        \  &ft == 'unite' ? unite#get_status_string() :
-        \  &ft == 'vimshell' ? vimshell#get_status_string() :
-        \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
-        \ ('' != MyModified() ? ' ' . MyModified() : '')
-endfunction
-
-function! MyFugitive()
-  if exists("*fugitive#head")
-    let _ = fugitive#head()
-    return strlen(_) ? ''._ : ''
-  endif
-  return ''
-endfunction
-
-Plugin 'edkolev/tmuxline.vim'
- let g:tmuxline_preset = {
-      \'a'    : '#S',
-      \'c'    : ['#(whoami)', '#(uptime  | cut -d " " -f 1,2,3)'],
-      \'win'  : ['#I', '#W'],
-      \'cwin' : ['#I', '#W', '#F'],
-      \'x'    : '#(date)',
-      \'y'    : ['%R', '%a', '%Y'],
-      \'z'    : '#H'}
-
-Plugin 'majutsushi/tagbar'
-map <F8> <ESC>:Tagbar<CR>
-" autocmd FileType * nested :call tagbar#autoopen(0)
-autocmd VimEnter * nested :call tagbar#autoopen(1)
-let g:tagbar_type_go = {
-    \ 'ctagstype' : 'go',
-    \ 'kinds'     : [
-        \ 'p:package',
-        \ 'i:imports:1',
-        \ 'c:constants',
-        \ 'v:variables',
-        \ 't:types',
-        \ 'n:interfaces',
-        \ 'w:fields',
-        \ 'e:embedded',
-        \ 'm:methods',
-        \ 'r:constructor',
-        \ 'f:functions'
-    \ ],
-    \ 'sro' : '.',
-    \ 'kind2scope' : {
-        \ 't' : 'ctype',
-        \ 'n' : 'ntype'
-    \ },
-    \ 'scope2kind' : {
-        \ 'ctype' : 't',
-        \ 'ntype' : 'n'
-    \ },
-    \ 'ctagsbin'  : '/Users/zzy/Documents/Projects/go/bin/gotags',
-    \ 'ctagsargs' : '-sort -silent'
-\ }
-
-" Plugin 'taglist.vim'
-" let Tlist_Ctags_Cmd = '/usr/local/bin/ctags'
-" let Tlist_Auto_Highlight_Tag = 1
-" let Tlist_Exit_OnlyWindow = 1
-" let Tlist_Use_Right_Window = 1
-" let Tlist_Show_One_File = 1
-" let Tlist_Auto_Open = 1
-
-Plugin 'Shougo/vimproc.vim'
-Plugin 'Shougo/vimshell.vim'
-
+" C,C++
 Plugin 'osyo-manga/vim-marching'
-let g:marching_include_paths = [
-      \ "/usr/include/c++/4.2.1",
-      \ "/usr/local/include/boost"
-      \ ]
-let g:marching_enable_neocomplete = 1
 
-" imap <buffer> <C-x><C-o> <Plug>(marching_start_omni_complete)
-" imap <buffer> <C-x><C-x><C-o> <Plug>(marching_force_start_omni_complete)
+" Doc
+Plugin 'DoxygenToolkit.vim'
 
+" formatting
+Plugin 'godlygeek/tabular'
 
-Plugin 'Shougo/neocomplete.vim'
+" Browsing code
+Plugin 'brookhong/cscope.vim'
+
+" syntax checking
+Plugin 'scrooloose/syntastic'
+
+" Fuzzy find
+Plugin 'L9'
+Plugin 'FuzzyFinder'
+Plugin 'yegappan/mru'
+
+" fish syntax
+Plugin 'aliva/vim-fish'
+
+call vundle#end()
+filetype plugin indent on
+
+" +----------------------+
+" | Plugin Configuration |
+" +----------------------+
+
+" PLUGIN: neocomplete.vim
 let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
 let g:neocomplete#enable_smart_case = 1
@@ -246,30 +156,7 @@ endif
 " https://github.com/c9s/perlomni.vim
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
-if !exists('g:neocomplete#force_omni_input_patterns')
-  let g:neocomplete#force_omni_input_patterns = {}
-endif
-let g:neocomplete#force_overwrite_completefunc = 1
-let g:neocomplete#force_omni_input_patterns.c =
-      \ '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?'
-let g:neocomplete#force_omni_input_patterns.cpp =
-      \ '[^.[:digit:] *\t]\%(\.\|->\)\%(\h\w*\)\?\|\h\w*::\%(\h\w*\)\?'
-" let g:neocomplete#force_omni_input_patterns.c =
-"       \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
-" let g:neocomplete#force_omni_input_patterns.cpp =
-"       \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
-" let g:neocomplete#force_omni_input_patterns.objc =
-"       \ '[^.[:digit:] *\t]\%(\.\|->\)\w*'
-" let g:neocomplete#force_omni_input_patterns.objcpp =
-"       \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
-let g:clang_complete_auto = 0
-let g:clang_auto_select = 0
-"let g:clang_use_library = 1
-let g:clang_library_path = '/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib'
-
-
-Plugin 'Shougo/neosnippet.vim'
-Plugin 'Shougo/neosnippet-snippets'
+" PLUGIN: neosnippet.vim
 " Plugin key-mappings.
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -288,7 +175,124 @@ if has('conceal')
   set conceallevel=2 concealcursor=i
 endif
 
-Plugin 'scrooloose/syntastic'
+" PLUGIN: nerdtree
+nnoremap <F7> <ESC>:NERDTreeToggle<CR>
+
+" PLUGIN: rainbow
+let g:rainbow_active = 1
+let g:rainbow_conf = {
+    \   'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+    \   'ctermfgs': ['darkgray', 'darkblue', 'darkmagenta', 'darkcyan'],
+    \   'operators': '_,_',
+    \   'parentheses': [['(',')'], ['\[','\]'], ['{','}']],
+    \   'separately': {
+    \       '*': {},
+    \       'lisp': {
+    \           'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+    \           'ctermfgs': ['darkgray', 'darkblue', 'darkmagenta', 'darkcyan', 'darkred', 'darkgreen'],
+    \       },
+    \       'vim': {
+    \           'parentheses': [['fu\w* \s*.*)','endfu\w*'], ['for','endfor'], ['while', 'endwhile'], ['if','_elseif\|else_','endif'], ['(',')'], ['\[','\]'], ['{','}']],
+    \       },
+    \       'tex': {
+    \           'parentheses': [['(',')'], ['\[','\]'], ['\\begin{.*}','\\end{.*}']],
+    \       },
+    \       'css': 0,
+    \       'stylus': 0,
+    \   }
+    \}
+
+" PLUGIN: lightline
+let g:lightline = {
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
+      \ },
+      \ 'component': {
+      \   'lineinfo': ' %3l:%-2v',
+      \ },
+      \ 'component_function': {
+      \   'readonly': 'MyReadonly',
+      \   'fugitive': 'MyFugitive',
+      \   'filename': 'MyFilename'
+      \ },
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '', 'right': '' }
+      \ }
+function! MyReadonly()
+  return &readonly ? '' : ''
+endfunction
+
+function! MyModified()
+  return &ft =~ 'help\|vimfiler' ? '' : &modified ? '+' : &modifiable ? '' : '-'
+endfunction
+
+function! MyFilename()
+  return ('' != MyReadonly() ? MyReadonly() . ' ' : '') .
+        \ (&ft == 'vimfiler' ? vimfiler#get_status_string() :
+        \  &ft == 'unite' ? unite#get_status_string() :
+        \  &ft == 'vimshell' ? vimshell#get_status_string() :
+        \ '' != expand('%:t') ? expand('%:t') : '[No Name]') .
+        \ ('' != MyModified() ? ' ' . MyModified() : '')
+endfunction
+
+function! MyFugitive()
+  if exists("*fugitive#head")
+    let _ = fugitive#head()
+    return strlen(_) ? ''._ : ''
+  endif
+  return ''
+endfunction
+
+" PLUGIN: tagbar
+nnoremap <F8> <ESC>:Tagbar<CR>
+" autocmd FileType * nested :call tagbar#autoopen(0)
+" autocmd VimEnter * nested :call tagbar#autoopen(1)
+if has('gui_running')
+  let g:tagbar_expand=1
+endif
+let g:tagbar_type_go = {
+    \ 'ctagstype' : 'go',
+    \ 'kinds'     : [
+        \ 'p:package',
+        \ 'i:imports:1',
+        \ 'c:constants',
+        \ 'v:variables',
+        \ 't:types',
+        \ 'n:interfaces',
+        \ 'w:fields',
+        \ 'e:embedded',
+        \ 'm:methods',
+        \ 'r:constructor',
+        \ 'f:functions'
+    \ ],
+    \ 'sro' : '.',
+    \ 'kind2scope' : {
+        \ 't' : 'ctype',
+        \ 'n' : 'ntype'
+    \ },
+    \ 'scope2kind' : {
+        \ 'ctype' : 't',
+        \ 'ntype' : 'n'
+    \ },
+    \ 'ctagsbin'  : '/Users/zzy/Documents/Projects/go/bin/gotags',
+    \ 'ctagsargs' : '-sort -silent'
+\ }
+
+" PLUGIN: vim-marching
+let g:marching_clang_command = "/usr/bin/clang"
+let g:marching_include_paths = [
+      \ "/usr/include/c++/4.2.1"
+      \ ]
+let g:marching_enable_neocomplete = 1
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#force_omni_input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+let g:neocomplete#force_omni_input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+imap <buffer> <C-x><C-o> <Plug>(marching_start_omni_complete)
+imap <buffer> <C-x><C-x><C-o> <Plug>(marching_force_start_omni_complete)
+
+" PLUGIN: syntastic
 let g:syntastic_check_on_open=1
 let g:syntastic_check_on_wq=0
 let g:syntastic_enable_signs=1
@@ -298,52 +302,33 @@ let g:syntastic_auto_loc_list=1
 let g:syntastic_loc_list_height=5
 let g:syntastic_mode_map = { 'mode': 'active',
       \ 'active_filetypes': ['ruby', 'php'],
-      \ 'passive_filetypes': ['puppet', 'html', 'nasm'] }
-map <F9> <ESC>:SyntasticToggleMode<CR>
+      \ 'passive_filetypes': ['puppet'] }
+noremap <F9> <ESC>:SyntasticToggleMode<CR>
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
-let g:syntastic_c_config_file = '.syntastic_c_config'
+" let g:syntastic_c_config_file = '.syntastic_c_config'
+" let g:syntastic_c_checkers = ['clang', 'cppcheck', 'cpplint'] 
+" let g:syntastic_cpp_checkers = ['clang', 'cppcheck', 'cpplint'] 
 
+" +-----------------------+
+" | General Configuration |
+" +-----------------------+
 
-
-Plugin 'godlygeek/tabular'
-
-Plugin 'PapayaWhip'
-" a theme
-
-Plugin 'DoxygenToolkit.vim'
-
-
-Plugin 'mattn/emmet-vim'
-
-" Plugin 'jiangmiao/auto-pairs'
-
-Plugin 'brookhong/cscope.vim'
-
-call vundle#end()
-filetype plugin indent on
-
-" +---------+
-" | Options |
-" +---------+
-
-" General
 syntax on
-set history=256
-set autowrite  " Writes on make/shell commands
-set autoread
+" set autowrite
+" set autoread
 set pastetoggle=<F10>
 set scrolloff=4
 set completeopt=menu,longest
 
-" Modline
+" Modeline
 set modeline
 set modelines=5
 
 " Backup
-set nowritebackup
-set nobackup
+" set nowritebackup
+" set nobackup
 
 " Search
 set hlsearch
@@ -356,61 +341,46 @@ set wildmode=longest,list
 
 " Formatting
 set backspace=indent,eol,start
-
-if !(&filetype=='tex' || &filetype=='plaintex' || &filetype=='make')
-  set tabstop=2
-  set softtabstop=2
-  set shiftwidth=2
-  set expandtab
-  set smarttab
-endif
-
-autocmd FileType markdown setlocal shiftwidth=4 tabstop=4 softtabstop=4
-autocmd FileType text,go setlocal textwidth=78 wrap
-" autocmd FileType text setlocal spell
-
 set autoindent
 set cindent
 set smartindent
-" set cinoptions=
-" set cinwords=
+
+set expandtab
+set smarttab
+set shiftwidth=2
+set tabstop=2
+set softtabstop=2
+autocmd FileType markdown setlocal shiftwidth=4 tabstop=4 softtabstop=4
+autocmd FileType make setlocal noexpandtab nosmarttab
+" autocmd FileType c,cpp,vim,go,sh,python,lisp setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType text setlocal textwidth=78 wrap
 
 " Looking
 set number
-" set showmatch
-" set matchtime=5
 set novisualbell
 set noerrorbells
-set laststatus=2  " Always show the status line.
-set vb t_vb=  " disable beeps
+set laststatus=2
+set vb t_vb=
 set ruler
 set showcmd
+set background=light
+colorscheme solarized
+set cursorline
 
+if has('gui_running')
+  set guifont=Monaco\ for\ Powerline:h13
+endif
+
+" fold
 set foldenable
 set foldmethod=manual
 
+" Mouse
 if has('mouse')
   set mouse=a
 endif
-
 set mousehide
 
+" window placement
 set splitbelow
 set splitright
-
-set cursorline
-
-set guifont=Monaco\ for\ Powerline:h13
-
-if has('gui_running')
-  colorscheme PapayaWhip
-else
-  colorscheme 256-jungle
-endif
-
-hi cursorline cterm=NONE ctermbg=black ctermfg=NONE guibg=yellow guifg=NONE
-
-
-autocmd BufNewFile,BufRead *.m setlocal ft=objc
-autocmd BufNewFile,BufRead *.asm,*.inc setlocal ft=nasm
-autocmd BufNewFile,BufRead *.md setlocal ft=markdown

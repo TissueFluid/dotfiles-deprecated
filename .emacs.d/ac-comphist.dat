@@ -1,0 +1,206 @@
+((("nyan-start-animation" .
+   [0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0])
+  ("nyan-" .
+   [0 0 0 0 2])
+  ("nyan-mode" .
+   [0 0 0 0 0 0 0 0 1])
+  ("/usr/include" .
+   [1 0 0 0 0 0 0 0 0 0 0 0])
+  ("setq-default" .
+   [0 0 0 0 0 0 0 2 0 0 0 0])
+  ("set-frame-font" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 1])
+  ("sml/apply-theme" .
+   [0 0 0 0 0 0 1 0 0 0 0 0 0 0 0])
+  ("powerline-arrow-left" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0])
+  ("powerline-vim-theme" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 0 0 0 0])
+  (":font" .
+   [2 0 0 0 0])
+  ("m" .
+   [1])
+  (":family" .
+   [2 0 0 0 0 1 1])
+  ("default" .
+   [0 0 0 0 0 0 3])
+  ("set-face-attribute" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 3])
+  ("system-type" .
+   [0 0 0 0 0 0 0 0 0 1 2])
+  ("eq" .
+   [3 0])
+  ("when" .
+   [1 0 0 0])
+  ("google-make-newline-indent" .
+   [0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("Google" .
+   [0 0 1 0 0 0])
+  ("google-set-c-style" .
+   [0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0])
+  ("google-c-style" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 1])
+  ("in" .
+   [2 0])
+  ("global-flycheck-mode" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1])
+  ("after-init-hook" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 1 0])
+  ("color-theme-solarized" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2])
+  ("ac-set-trigger-key" .
+   [0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0])
+  ("achead:include-directories" .
+   [0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1])
+  ("a" .
+   [1])
+  ("auto-complete-c-headers" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1])
+  ("while" .
+   [1 0 0 0 0])
+  ("include" .
+   [0 0 0 7 3 2 2])
+  ("getline" .
+   [0 0 1 0 1 0 1])
+  ("c++-mode" .
+   [0 0 0 0 0 0 0 2])
+  ("my-ac-clang-mode-setup" .
+   [0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("add-to-list" .
+   [0 0 0 0 0 0 0 0 1 0 1])
+  ("auto-complete-clang" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1])
+  ("my-ac-cc-mode-setup" .
+   [0 0 1 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("ac-source" .
+   [1 0 0 0 0 0 0 0 1])
+  ("ac-source-clang" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 1])
+  ("append" .
+   [1 0 0 0 0 1])
+  ("ac-sources" .
+   [0 0 0 0 0 0 0 1 0 7])
+  ("setq" .
+   [6 0 0 0])
+  ("defun*" .
+   [0 0 0 0 0 2])
+  ("ac-cc-mode-setup" .
+   [0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0])
+  ("c-mode-common-hook" .
+   [0 0 0 0 0 0 0 0 0 1 2 0 0 0 0 0 0 2])
+  ("add-hook" .
+   [0 0 0 0 0 0 0 7])
+  ("require" .
+   [1 0 0 3 14 0 2])
+  ("yasnippet" .
+   [0 0 0 0 0 1 0 0 0])
+  ("yas-global-mode" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 1])
+  ("inc" .
+   [1 0 1])
+  ("main" .
+   [2 0 1 0])
+  ("std" .
+   [16 0 0])
+  ("stdio.h" .
+   [1 0 0 0 0 1 0])
+  ("fstream" .
+   [0 0 0 0 0 0 1])
+  ("solarized-theme" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 1 0 0])
+  ("color-theme-sanityinc-solarized" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2])
+  ("load-theme" .
+   [1 0 0 0 0 0 0 1 0 2])
+  ("s" .
+   [2])
+  ("flycheck" .
+   [1 0 0 0 0 0 0 1])
+  ("flycheck-google-cpplint" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1])
+  ("eval-after-load" .
+   [0 0 0 0 0 0 0 1 0 0 0 0 0 0 0])
+  ("progn" .
+   [1 0 0 0 0])
+  ("by" .
+   [1 0])
+  ("flycheck-" .
+   [0 0 0 0 0 0 0 0 1])
+  ("flycheck-add-next-checker" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0])
+  ("c/c++-cppcheck" .
+   [0 0 0 0 0 0 0 0 0 1 0 0 0 0])
+  ("c/c++-googlelint" .
+   [0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0])
+  ("warning-level-aliases" .
+   [1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0])
+  ("nil" .
+   [5 0 0])
+  ("defvar" .
+   [1 0 0 0 0 1])
+  ("warn" .
+   [1 0 0 0])
+  ("ac-quick-help-delay" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0])
+  ("map" .
+   [2 0 1])
+  ("int" .
+   [3 0 0])
+  ("string" .
+   [3 0 0 0 0 1])
+  ("insert" .
+   [0 0 2 1 0 1])
+  ("(" .
+   [2])
+  ("value_comp" .
+   [0 0 1 0 0 0 0 0 0 0])
+  ("pair" .
+   [1 0 0 0])
+  ("cout" .
+   [1 0 0 1])
+  ("at" .
+   [0 2])
+  ("powerline" .
+   [1 0 0 0 0 0 0 0 3])
+  ("powerline-evil" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 3])
+  ("powerline-vc" .
+   [0 0 0 0 0 0 0 0 0 0 0 2])
+  ("powerline-center-evil-theme" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 0 0 0 0 0 0])
+  ("powerline-default-theme" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 2 0 1 1 0 0 0 0 0 0 0])
+  ("powerline-evil-vim-theme" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1])
+  ("powerline-evil-center-color-theme" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 0 0 1 0 0 3 1 0 0 0 0 0 0 0])
+  ("powerline-evil-vim-color-theme" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 1 1 0 0 0 0])
+  ("if" .
+   [1 1])
+  ("set" .
+   [2 0 0])
+  ("smart-mode-line" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 1])
+  ("sml/setup" .
+   [0 0 0 0 1 0 0 0 0])
+  ("i" .
+   [1])
+  ("set-default-font" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1])
+  ("powerline-" .
+   [0 0 0 0 0 0 0 0 0 1])
+  ("ac-source-filename" .
+   [0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 0 0 1])
+  ("set-default" .
+   [0 0 0 0 0 0 0 0 1 0 1])
+  (":eval" .
+   [1 0 0 0 0])
+  ("list" .
+   [1 0 0 0])
+  ("nyan-create" .
+   [0 0 0 0 0 0 0 0 1 0 0])
+  ("nyan-wavy-trail" .
+   [0 0 0 0 0 0 0 0 0 0 0 0 1 0 0])
+  ("erase" .
+   [1 0 0 0 0])))

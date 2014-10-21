@@ -10,49 +10,59 @@ Other Languages: [Wu Chinese（吳語）](https://github.com/TissueFluid/dotfile
 
 ```vim
 Plugin 'gmarik/Vundle.vim'
-Plugin 'nsf/gocode'
-Plugin 'dgryski/vim-godef'
-Plugin 'rizzatti/dash.vim'
-Plugin 'LaTeX-Box-Team/LaTeX-Box'
-Plugin 'luochen1990/rainbow'
-Plugin 'tomtom/tcomment_vim'
-Plugin 'mru.vim'
-Plugin '256-jungle'
-Plugin 'scrooloose/nerdtree'
-Plugin 'FencView.vim'
-Plugin 'Lokaltog/powerline'
-Plugin 'majutsushi/tagbar'
-Plugin 'Rip-Rip/clang_complete'
+Plugin 'altercation/vim-colors-solarized'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'Shougo/neosnippet.vim'
 Plugin 'Shougo/neosnippet-snippets'
-Plugin 'scrooloose/syntastic'
-Plugin 'godlygeek/tabular'
-Plugin 'PapayaWhip'
+Plugin 'Shougo/vimproc'
+Plugin 'Shougo/vimshell'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'majutsushi/tagbar'
+Plugin 'luochen1990/rainbow'
+Plugin 'tpope/vim-fugitive'
+Plugin 'itchyny/lightline.vim'
+Plugin 'Yggdroot/indentLine'
+Plugin 'FencView.vim'
+Plugin 'osyo-manga/vim-marching'
 Plugin 'DoxygenToolkit.vim'
-Plugin 'mattn/emmet-vim'
-Plugin 'jiangmiao/auto-pairs'
+Plugin 'godlygeek/tabular'
 Plugin 'brookhong/cscope.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'L9'
+Plugin 'FuzzyFinder'
+Plugin 'yegappan/mru'
+Plugin 'aliva/vim-fish'
 ```
 
 #### Main features
 
-* Write and browse code fast
-* Comment code easily
-* Syntax checking
-* Auto detect file encoding
-* Good looking and seductive
+* Gorgeous
+
+## Fish Configuration
+
+What is [fish](http://fishshell.com)?
+
+I use a configuration framework - [Oh my fish](https://github.com/bpinto/oh-my-fish)
+
+> Give a man a fish and you feed him for a day; teach a man to fish and you feed him for a lifetime.
 
 ## Zsh Configuration
 
-I use a configuration framework [Prezto](https://github.com/sorin-ionescu/prezto).
+I use a configuration framework - [Prezto](https://github.com/sorin-ionescu/prezto).
 
-## Tmux Configuration
+## Emacs Configuration
 
-I use the following things to make my tmux panel seductive:
+#### Plugins I used
 
-* [Lokaltog/powerline](https://github.com/Lokaltog/powerline)
-* [thewtex/tmux-mem-cpu-load](https://github.com/thewtex/tmux-mem-cpu-load)
+* evil (I admit that first habits are strongest)
+* auto-complete
+* auto-complete-clang
+* auto-complete-c-headers
+* Yasnippet
+* flycheck
+* flycheck-google-cpplint
+* google-c-style
 
 ## My stuff
 
