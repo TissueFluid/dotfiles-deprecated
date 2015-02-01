@@ -1,6 +1,6 @@
 # dotfiles
 
-Backup my powerful, gorgeous configuration files. 
+Backup my powerful, gorgeous configuration files.
 
 Other Languages: [Wu Chinese（吳語）](https://github.com/TissueFluid/dotfiles/blob/master/README.wuu.md)
 

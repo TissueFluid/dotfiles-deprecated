@@ -41,9 +41,10 @@ Plugin 'luochen1990/rainbow'
 Plugin 'tpope/vim-fugitive'
 Plugin 'itchyny/lightline.vim'
 Plugin 'Yggdroot/indentLine'
+Plugin 'ntpeters/vim-better-whitespace'
 
 " Encoding autodetect
-Plugin 'FencView.vim'
+Plugin 'mbbill/fencview'
 
 " C,C++
 Plugin 'osyo-manga/vim-marching'
@@ -65,8 +66,20 @@ Plugin 'L9'
 Plugin 'FuzzyFinder'
 Plugin 'yegappan/mru'
 
-" fish syntax
-Plugin 'aliva/vim-fish'
+" Tmux
+Plugin 'edkolev/tmuxline.vim'
+
+" surroundings
+Plugin 'tpope/vim-surround'
+
+" LaTeX
+Plugin 'LaTeX-Box-Team/LaTeX-Box'
+
+" Plugin 'terryma/vim-multiple-cursors'
+
+" HTML5
+" Plugin 'othree/html5.vim'
+Plugin 'mattn/emmet-vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -176,7 +189,7 @@ if has('conceal')
 endif
 
 " PLUGIN: nerdtree
-nnoremap <F7> <ESC>:NERDTreeToggle<CR>
+noremap <F7> <ESC>:NERDTreeToggle<CR>
 
 " PLUGIN: rainbow
 let g:rainbow_active = 1
@@ -187,6 +200,7 @@ let g:rainbow_conf = {
     \   'parentheses': [['(',')'], ['\[','\]'], ['{','}']],
     \   'separately': {
     \       '*': {},
+    \       'html': {},
     \       'lisp': {
     \           'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
     \           'ctermfgs': ['darkgray', 'darkblue', 'darkmagenta', 'darkcyan', 'darkred', 'darkgreen'],
@@ -301,15 +315,33 @@ let g:syntastic_warning_symbol='⚠'
 let g:syntastic_auto_loc_list=1
 let g:syntastic_loc_list_height=5
 let g:syntastic_mode_map = { 'mode': 'active',
-      \ 'active_filetypes': ['ruby', 'php'],
-      \ 'passive_filetypes': ['puppet'] }
+      \ 'active_filetypes': ['c', 'cpp'],
+      \ 'passive_filetypes': ['puppet', 'html'] }
 noremap <F9> <ESC>:SyntasticToggleMode<CR>
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 " let g:syntastic_c_config_file = '.syntastic_c_config'
-" let g:syntastic_c_checkers = ['clang', 'cppcheck', 'cpplint'] 
-" let g:syntastic_cpp_checkers = ['clang', 'cppcheck', 'cpplint'] 
+let g:syntastic_c_checkers = ['gcc', 'cppcheck']
+let g:syntastic_cpp_checkers = ['gcc', 'cppcheck']
+
+" Plugin: tmuxline
+let g:tmuxline_preset = {
+      \'a'    : '#S',
+      \'b'    : '#W',
+      \'c'    : '#H',
+      \'win'  : '#I #W',
+      \'cwin' : '#I #W',
+      \'x'    : '%a',
+      \'y'    : '#W %R',
+      \'z'    : '#H'}
+
+" Plugin: LaTeX-Box
+let g:LatexBox_viewer = "open"
+let g:LatexBox_Folding = 1
+
+" Plugin: emmet
+let g:user_emmet_leader_key = '<C-e>'
 
 " +-----------------------+
 " | General Configuration |
@@ -320,7 +352,7 @@ syntax on
 " set autoread
 set pastetoggle=<F10>
 set scrolloff=4
-set completeopt=menu,longest
+set completeopt=menu,preview,longest
 
 " Modeline
 set modeline
@@ -350,12 +382,15 @@ set smarttab
 set shiftwidth=2
 set tabstop=2
 set softtabstop=2
+autocmd BufRead,BufNewFile *.md setlocal filetype=markdown
 autocmd FileType markdown setlocal shiftwidth=4 tabstop=4 softtabstop=4
-autocmd FileType make setlocal noexpandtab nosmarttab
+autocmd FileType make setlocal noexpandtab
+autocmd FileType text setlocal textwidth=78 wrap spell
+autocmd FileType tex setlocal spell
 " autocmd FileType c,cpp,vim,go,sh,python,lisp setlocal shiftwidth=2 tabstop=2 softtabstop=2
-autocmd FileType text setlocal textwidth=78 wrap
 
 " Looking
+" set relativenumber
 set number
 set novisualbell
 set noerrorbells
@@ -384,3 +419,8 @@ set mousehide
 " window placement
 set splitbelow
 set splitright
+
+autocmd BufReadPost *
+			\ if line("'\"")>0&&line("'\"")<=line("$") |
+			\	exe "normal g'\"" |
+			\ endif
