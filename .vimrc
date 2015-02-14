@@ -30,7 +30,7 @@ Plugin 'Shougo/vimproc'
 Plugin 'Shougo/vimshell'
 
 " make comments
-Plugin 'tomtom/tcomment_vim'
+Plugin 'tpope/vim-commentary'
 
 " toolbar
 Plugin 'scrooloose/nerdtree'
@@ -75,11 +75,14 @@ Plugin 'tpope/vim-surround'
 " LaTeX
 Plugin 'LaTeX-Box-Team/LaTeX-Box'
 
-" Plugin 'terryma/vim-multiple-cursors'
-
 " HTML5
-" Plugin 'othree/html5.vim'
 Plugin 'mattn/emmet-vim'
+
+" editorconfig
+Plugin 'editorconfig/editorconfig-vim'
+
+" JSHint
+Plugin 'jshint.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -259,7 +262,7 @@ endfunction
 
 " PLUGIN: tagbar
 nnoremap <F8> <ESC>:Tagbar<CR>
-" autocmd FileType * nested :call tagbar#autoopen(0)
+autocmd FileType * nested :call tagbar#autoopen(0)
 " autocmd VimEnter * nested :call tagbar#autoopen(1)
 if has('gui_running')
   let g:tagbar_expand=1
@@ -390,8 +393,8 @@ autocmd FileType tex setlocal spell
 " autocmd FileType c,cpp,vim,go,sh,python,lisp setlocal shiftwidth=2 tabstop=2 softtabstop=2
 
 " Looking
-" set relativenumber
 set number
+set relativenumber
 set novisualbell
 set noerrorbells
 set laststatus=2
