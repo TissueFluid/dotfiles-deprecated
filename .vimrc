@@ -62,8 +62,6 @@ Plugin 'brookhong/cscope.vim'
 Plugin 'scrooloose/syntastic'
 
 " Fuzzy find
-Plugin 'L9'
-Plugin 'FuzzyFinder'
 Plugin 'yegappan/mru'
 
 " Tmux
@@ -83,6 +81,8 @@ Plugin 'editorconfig/editorconfig-vim'
 
 " JSHint
 Plugin 'jshint.vim'
+
+" navigate
 
 call vundle#end()
 filetype plugin indent on
@@ -310,20 +310,21 @@ imap <buffer> <C-x><C-o> <Plug>(marching_start_omni_complete)
 imap <buffer> <C-x><C-x><C-o> <Plug>(marching_force_start_omni_complete)
 
 " PLUGIN: syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_check_on_open=1
 let g:syntastic_check_on_wq=0
 let g:syntastic_enable_signs=1
-let g:syntastic_error_symbol='✗'
-let g:syntastic_warning_symbol='⚠'
+let g:syntastic_error_symbol = "✗"
+let g:syntastic_warning_symbol = "⚠"
 let g:syntastic_auto_loc_list=1
 let g:syntastic_loc_list_height=5
 let g:syntastic_mode_map = { 'mode': 'active',
       \ 'active_filetypes': ['c', 'cpp'],
       \ 'passive_filetypes': ['puppet', 'html'] }
 noremap <F9> <ESC>:SyntasticToggleMode<CR>
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
 " let g:syntastic_c_config_file = '.syntastic_c_config'
 let g:syntastic_c_checkers = ['gcc', 'cppcheck']
 let g:syntastic_cpp_checkers = ['gcc', 'cppcheck']
