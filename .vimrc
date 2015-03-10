@@ -83,6 +83,9 @@ Plugin 'editorconfig/editorconfig-vim'
 Plugin 'jshint.vim'
 
 " navigate
+Plugin 'kien/ctrlp.vim'
+Plugin 'mileszs/ack.vim'
+Bundle 'dyng/ctrlsf.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -262,7 +265,7 @@ endfunction
 
 " PLUGIN: tagbar
 nnoremap <F8> <ESC>:Tagbar<CR>
-autocmd FileType * nested :call tagbar#autoopen(0)
+" autocmd FileType * nested :call tagbar#autoopen(0)
 " autocmd VimEnter * nested :call tagbar#autoopen(1)
 if has('gui_running')
   let g:tagbar_expand=1
@@ -347,6 +350,16 @@ let g:LatexBox_Folding = 1
 " Plugin: emmet
 let g:user_emmet_leader_key = '<C-e>'
 
+" Plugin: ack.vim
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
+
+" Plugin: ctrlSF
+let g:ctrlsf_ackprg = 'ag'
+nmap <C-F>f <Plug>CtrlSFPrompt
+
+
 " +-----------------------+
 " | General Configuration |
 " +-----------------------+
@@ -391,11 +404,11 @@ autocmd FileType markdown setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd FileType make setlocal noexpandtab
 autocmd FileType text setlocal textwidth=78 wrap spell
 autocmd FileType tex setlocal spell
-" autocmd FileType c,cpp,vim,go,sh,python,lisp setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType c,cpp,vim,go,sh,python,lisp setlocal shiftwidth=2 tabstop=2 softtabstop=2
 
 " Looking
 set number
-set relativenumber
+" set relativenumber
 set novisualbell
 set noerrorbells
 set laststatus=2
