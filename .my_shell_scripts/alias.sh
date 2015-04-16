@@ -1,5 +1,5 @@
 alias diff='colordiff'
-alias make='colormake'
+# alias make='colormake'
 alias rm='trash'
 alias vi='__vi'
 

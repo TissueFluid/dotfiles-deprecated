@@ -29,3 +29,9 @@ source ~/.my_shell_scripts/alias.sh
 
 clear
 bash ~/.my_shell_scripts/cow.sh
+
+export GOPATH=${HOME}/Workbench/go
+export PATH=${PATH}:${GOPATH}/bin
+
+# export MSF_DATABASE_CONFIG=/Users/zzy/Programs/metasploit-framework/config/database.yml
+# export PATH=${PATH}:"/Users/zzy/Programs/metasploit-framework"

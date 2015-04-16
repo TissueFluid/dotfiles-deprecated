@@ -85,7 +85,14 @@ Plugin 'jshint.vim'
 " navigate
 Plugin 'kien/ctrlp.vim'
 Plugin 'mileszs/ack.vim'
-Bundle 'dyng/ctrlsf.vim'
+Plugin 'dyng/ctrlsf.vim'
+
+" bracket
+Plugin 'jiangmiao/auto-pairs'
+
+" golang
+Plugin 'google/vim-ft-go'
+Plugin 'nsf/gocode', {'rtp': 'vim/'}
 
 call vundle#end()
 filetype plugin indent on
@@ -123,9 +130,9 @@ inoremap <expr><C-l>     neocomplete#complete_common_string()
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
-  return neocomplete#close_popup() . "\<CR>"
+  " return neocomplete#close_popup() . "\<CR>"
   " For no inserting <CR> key.
-  "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
 endfunction
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -294,7 +301,7 @@ let g:tagbar_type_go = {
         \ 'ctype' : 't',
         \ 'ntype' : 'n'
     \ },
-    \ 'ctagsbin'  : '/Users/zzy/Documents/Projects/go/bin/gotags',
+    \ 'ctagsbin'  : 'gotags',
     \ 'ctagsargs' : '-sort -silent'
 \ }
 
@@ -400,11 +407,11 @@ set shiftwidth=2
 set tabstop=2
 set softtabstop=2
 autocmd BufRead,BufNewFile *.md setlocal filetype=markdown
-autocmd FileType markdown setlocal shiftwidth=4 tabstop=4 softtabstop=4
+autocmd FileType markdown,python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 autocmd FileType make setlocal noexpandtab
 autocmd FileType text setlocal textwidth=78 wrap spell
 autocmd FileType tex setlocal spell
-autocmd FileType c,cpp,vim,go,sh,python,lisp setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType c,cpp,vim,go,sh,lisp setlocal shiftwidth=2 tabstop=2 softtabstop=2
 
 " Looking
 set number
@@ -416,6 +423,7 @@ set vb t_vb=
 set ruler
 set showcmd
 set background=light
+" let g:solarized_termcolors=256
 colorscheme solarized
 set cursorline
 
@@ -437,6 +445,9 @@ set mousehide
 set splitbelow
 set splitright
 
+if has('gui_running')
+  let $PATH .= ':/Users/zzy/Workbench/go/bin'
+endif
 autocmd BufReadPost *
 			\ if line("'\"")>0&&line("'\"")<=line("$") |
 			\	exe "normal g'\"" |
