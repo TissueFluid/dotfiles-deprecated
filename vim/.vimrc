@@ -93,6 +93,7 @@ Plugin 'jiangmiao/auto-pairs'
 " golang
 Plugin 'google/vim-ft-go'
 Plugin 'nsf/gocode', {'rtp': 'vim/'}
+Plugin 'vim-jp/vim-go-extra'
 
 call vundle#end()
 filetype plugin indent on
@@ -401,17 +402,17 @@ set autoindent
 set cindent
 set smartindent
 
-set expandtab
+" set expandtab
 set smarttab
 set shiftwidth=2
 set tabstop=2
 set softtabstop=2
 autocmd BufRead,BufNewFile *.md setlocal filetype=markdown
-autocmd FileType markdown,python setlocal shiftwidth=4 tabstop=4 softtabstop=4
-autocmd FileType make setlocal noexpandtab
-autocmd FileType text setlocal textwidth=78 wrap spell
-autocmd FileType tex setlocal spell
-autocmd FileType c,cpp,vim,go,sh,lisp setlocal shiftwidth=2 tabstop=2 softtabstop=2
+autocmd FileType markdown,python setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
+" autocmd FileType make,go setlocal noexpandtab
+autocmd FileType text setlocal textwidth=78 wrap spell expandtab
+autocmd FileType tex setlocal spell expandtab
+autocmd FileType c,cpp,vim,sh,lisp setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
 
 " Looking
 set number
