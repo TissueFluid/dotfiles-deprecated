@@ -28,6 +28,7 @@ Plugin 'Shougo/neosnippet.vim'
 Plugin 'Shougo/neosnippet-snippets'
 Plugin 'Shougo/vimproc'
 Plugin 'Shougo/vimshell'
+Plugin 'Shougo/unite.vim'
 
 " make comments
 Plugin 'tpope/vim-commentary'
@@ -95,6 +96,15 @@ Plugin 'google/vim-ft-go'
 Plugin 'nsf/gocode', {'rtp': 'vim/'}
 Plugin 'vim-jp/vim-go-extra'
 
+" Ruby
+Plugin 'tpope/vim-rails'
+
+" markdown
+Plugin 'shime/vim-livedown'
+
+" jade template engine
+Plugin 'jade.vim'
+
 call vundle#end()
 filetype plugin indent on
 
@@ -103,6 +113,10 @@ filetype plugin indent on
 " +----------------------+
 
 " PLUGIN: neocomplete.vim
+"Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplete.
 let g:neocomplete#enable_at_startup = 1
 " Use smartcase.
 let g:neocomplete#enable_smart_case = 1
@@ -131,9 +145,9 @@ inoremap <expr><C-l>     neocomplete#complete_common_string()
 " <CR>: close popup and save indent.
 inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
 function! s:my_cr_function()
-  " return neocomplete#close_popup() . "\<CR>"
+  return neocomplete#close_popup() . "\<CR>"
   " For no inserting <CR> key.
-  return pumvisible() ? neocomplete#close_popup() : "\<CR>"
+  "return pumvisible() ? neocomplete#close_popup() : "\<CR>"
 endfunction
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
@@ -178,7 +192,11 @@ endif
 "let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
 "let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
 "let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
-
+if !exists('g:neocomplete#force_omni_input_patterns')
+  let g:neocomplete#force_omni_input_patterns = {}
+endif
+let g:neocomplete#force_omni_input_patterns.ruby =
+      \ '[^. *\t]\.\w*\|\h\w*::'
 " For perlomni.vim setting.
 " https://github.com/c9s/perlomni.vim
 let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
@@ -231,6 +249,7 @@ let g:rainbow_conf = {
     \}
 
 " PLUGIN: lightline
+
 let g:lightline = {
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ], [ 'fugitive', 'filename' ] ]
@@ -270,6 +289,13 @@ function! MyFugitive()
   endif
   return ''
 endfunction
+
+
+" PLUGIN: vimshell
+let g:vimshell_enable_smart_case = 1
+let g:vimshell_prompt = '➤  '
+let g:vimshell_user_prompt = 'fnamemodify(getcwd(), ":~")'
+" let g:vimshell_right_prompt = 'system("date")'
 
 " PLUGIN: tagbar
 nnoremap <F8> <ESC>:Tagbar<CR>
@@ -367,6 +393,9 @@ endif
 let g:ctrlsf_ackprg = 'ag'
 nmap <C-F>f <Plug>CtrlSFPrompt
 
+" Plugin: livedown
+let g:livedown_autorun = 1
+let g:livedown_open = 1
 
 " +-----------------------+
 " | General Configuration |
@@ -402,17 +431,17 @@ set autoindent
 set cindent
 set smartindent
 
-" set expandtab
+set expandtab
 set smarttab
 set shiftwidth=2
 set tabstop=2
 set softtabstop=2
 autocmd BufRead,BufNewFile *.md setlocal filetype=markdown
-autocmd FileType markdown,python setlocal shiftwidth=4 tabstop=4 softtabstop=4 expandtab
-" autocmd FileType make,go setlocal noexpandtab
-autocmd FileType text setlocal textwidth=78 wrap spell expandtab
-autocmd FileType tex setlocal spell expandtab
-autocmd FileType c,cpp,vim,sh,lisp setlocal shiftwidth=2 tabstop=2 softtabstop=2 expandtab
+autocmd FileType markdown,python setlocal shiftwidth=4 tabstop=4 softtabstop=4
+autocmd FileType make,go setlocal noexpandtab
+autocmd FileType text setlocal textwidth=78 wrap spell list listchars=tab:»\ ,eol:↩
+autocmd FileType tex setlocal spell
+" autocmd FileType c,cpp,vim,sh,lisp setlocal shiftwidth=2 tabstop=2 softtabstop=2
 
 " Looking
 set number
@@ -426,6 +455,7 @@ set showcmd
 set background=light
 " let g:solarized_termcolors=256
 colorscheme solarized
+
 set cursorline
 
 if has('gui_running')
@@ -434,7 +464,7 @@ endif
 
 " fold
 set foldenable
-set foldmethod=manual
+set foldmethod=marker
 
 " Mouse
 if has('mouse')
@@ -446,10 +476,14 @@ set mousehide
 set splitbelow
 set splitright
 
+" undo dir
+set undofile
+set undodir=/Users/zzy/.vimundo
+
 if has('gui_running')
   let $PATH .= ':/Users/zzy/Workbench/go/bin'
 endif
 autocmd BufReadPost *
-			\ if line("'\"")>0&&line("'\"")<=line("$") |
-			\	exe "normal g'\"" |
-			\ endif
+      \ if line("'\"")>0&&line("'\"")<=line("$") |
+      \	exe "normal g'\"" |
+      \ endif

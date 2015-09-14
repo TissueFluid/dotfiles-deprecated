@@ -19,10 +19,10 @@ install_powerline_precmd
 
 export PATH=$PATH:"/usr/local/sbin"
 
-if [ -z "$SSH_AUTH_SOCK" ]; then
-  eval `ssh-agent`
-fi
-ssh-add ~/.ssh/vm_ubuntu_rsa
+# if [ -z "$SSH_AUTH_SOCK" ]; then
+#   eval `ssh-agent`
+# fi
+# ssh-add ~/.ssh/vm_ubuntu_rsa
 
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ~/.my_shell_scripts/alias.sh
@@ -35,3 +35,17 @@ export PATH=${PATH}:${GOPATH}/bin
 
 # export MSF_DATABASE_CONFIG=/Users/zzy/Programs/metasploit-framework/config/database.yml
 # export PATH=${PATH}:"/Users/zzy/Programs/metasploit-framework"
+
+function fuck()
+{
+  config_shadowsocks="$HOME/.config/shadowsocks.json"
+
+  if [ -e "$config_shadowsocks"  ]; then
+    sslocal -c $config_shadowsocks
+  fi
+}
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+export NVM_DIR="/Users/zzy/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
