@@ -2,6 +2,7 @@ alias diff='colordiff'
 # alias make='colormake'
 alias rm='trash'
 alias vi='__vi'
+alias sl='ls'
 
 function __vi()
 {

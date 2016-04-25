@@ -1,1 +1,1 @@
-fpath=(/usr/local/share/zsh-completions $fpath)
+fpath=(/Users/zzy/homebrew/share/zsh-completions $fpath)

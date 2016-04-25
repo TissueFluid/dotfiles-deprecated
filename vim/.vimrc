@@ -105,6 +105,9 @@ Plugin 'shime/vim-livedown'
 " jade template engine
 Plugin 'jade.vim'
 
+" Syntax for toml
+Plugin 'cespare/vim-toml'
+
 call vundle#end()
 filetype plugin indent on
 
@@ -179,7 +182,7 @@ inoremap <expr><C-e>  neocomplete#cancel_popup()
 "inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
 
 " Enable omni completion.
-autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType css,less setlocal omnifunc=csscomplete#CompleteCSS
 autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
 autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
@@ -334,15 +337,18 @@ let g:tagbar_type_go = {
 
 " PLUGIN: vim-marching
 let g:marching_clang_command = "/usr/bin/clang"
+let g:marching_clang_command_option = "-std=c++11"
 let g:marching_include_paths = [
-      \ "/usr/include/c++/4.2.1"
+      \ "/Users/zzy/homebrew/Cellar/gcc/5.3.0/include/c++/5.3.0"
       \ ]
 let g:marching_enable_neocomplete = 1
 if !exists('g:neocomplete#force_omni_input_patterns')
   let g:neocomplete#force_omni_input_patterns = {}
 endif
 let g:neocomplete#force_omni_input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
-let g:neocomplete#force_omni_input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+let g:neocomplete#force_omni_input_patterns.cpp =
+    \ '[^.[:digit:] *\t]\%(\.\|->\)\w*\|\h\w*::\w*'
+set updatetime=200
 imap <buffer> <C-x><C-o> <Plug>(marching_start_omni_complete)
 imap <buffer> <C-x><C-x><C-o> <Plug>(marching_force_start_omni_complete)
 
@@ -363,8 +369,7 @@ let g:syntastic_mode_map = { 'mode': 'active',
       \ 'passive_filetypes': ['puppet', 'html'] }
 noremap <F9> <ESC>:SyntasticToggleMode<CR>
 " let g:syntastic_c_config_file = '.syntastic_c_config'
-let g:syntastic_c_checkers = ['gcc', 'cppcheck']
-let g:syntastic_cpp_checkers = ['gcc', 'cppcheck']
+let g:syntastic_cpp_compiler_options='-std=c++11'
 
 " Plugin: tmuxline
 let g:tmuxline_preset = {
@@ -402,8 +407,8 @@ let g:livedown_open = 1
 " +-----------------------+
 
 syntax on
-" set autowrite
-" set autoread
+set autowrite
+set autoread
 set pastetoggle=<F10>
 set scrolloff=4
 set completeopt=menu,preview,longest

@@ -31,6 +31,7 @@ case "$1" in
     CONF_EMACS="${CONF_ROOT}/emacs/init.el"
     [[ ! -d ~/.emacs.d ]] && mkdir -p ~/.emacs.d
     [[ -f "$CONF_EMACS" ]] && ln -s "$CONF_EMACS" ~/.emacs.d/init.el
+    ;;
   *)
     echo "$0 [vim | tmux | zsh | emacs]"
 esac
