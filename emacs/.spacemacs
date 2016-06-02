@@ -47,6 +47,7 @@ values."
      javascript
      go
      latex
+     yaml
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -270,7 +271,7 @@ you should place you code here."
               (add-to-list 'company-c-headers-path-system
                            "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/include")
               (add-to-list 'company-c-headers-path-system
-                           "/Users/zzy/homebrew/include/c++/5.3.0")
+                           "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1")
               (setq company-clang-arguments '("-std=c++11"))
               ))
 
@@ -325,6 +326,31 @@ you should place you code here."
 
   ;; LaTeX
   (add-hook 'doc-view-mode-hook 'auto-revert-mode)
+
+  ;; org-publish
+  (setq org-publish-project-alist
+        '(
+          ("blog/notes"
+           :base-directory "~/Workbench/org-blog/notes"
+           :publishing-directory "~/Workbench/org-blog/public_html"
+           :base-extension "org"
+           :publishing-function org-html-publish-to-html
+           :recursive t
+           :headline-levels 4
+           :section-number nil
+           :auto-sitemap t
+           :sitemap-filename "sitemap.org"
+           :sitemap-title "Sitemap"
+           )
+          ("blog/static"
+           :base-directory "~/Workbench/org-blog/static"
+           :publishing-directory "~/Workbench/org-blog/public_html"
+           :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
+           :recursive t
+           :publishing-function org-publish-attachment
+           )
+          ("blog" :components ("blog/notes" "blog/static"))
+          ))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
