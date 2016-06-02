@@ -346,6 +346,7 @@ you should place you code here."
 
   ;; indent guide
   (indent-guide-global-mode)
+  (set-face-foreground 'indent-guide-face "lightgray")
   (setq-default indent-guide-recursive t)
 
   ;; git-commit
