@@ -28,7 +28,7 @@ values."
      (shell :variables
             shell-default-shell 'eshell
             shell-default-position 'bottom
-            shell-default-height 30
+            shell-default-height 25
             shell-enable-smart-eshell t)
      emacs-lisp
      git
@@ -48,6 +48,11 @@ values."
      go
      latex
      yaml
+     gtags
+     cscope
+     (chinese :variables
+              chinese-enable-youdao-dict t)
+     semantic
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -219,7 +224,7 @@ values."
    ;; If non nil line numbers are turned on in all `prog-mode' and `text-mode'
    ;; derivatives. If set to `relative', also turns on relative line numbers.
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers t
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
    dotspacemacs-smartparens-strict-mode nil
@@ -255,6 +260,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   (setq-default dotspacemacs-themes '(solarized-light leuven zenburn))
   (setq ns-use-srgb-colorspace nil)
+  (setq tramp-ssh-controlmaster-options
+        "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
+  (setq-default git-magit-status-fullscreen t)
   )
 
 (defun dotspacemacs/user-config ()
@@ -265,13 +273,14 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place you code here."
   ;; c++
+  (setq-default c-basic-offset 4)
   (add-hook 'c++-mode-hook
             (lambda ()
               (setq flycheck-clang-language-standard "c++11")
               (add-to-list 'company-c-headers-path-system
-                           "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/include")
+                          "/usr/local/include")
               (add-to-list 'company-c-headers-path-system
-                           "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1")
+                           "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk/usr/include")
               (setq company-clang-arguments '("-std=c++11"))
               ))
 
@@ -327,30 +336,22 @@ you should place you code here."
   ;; LaTeX
   (add-hook 'doc-view-mode-hook 'auto-revert-mode)
 
-  ;; org-publish
-  (setq org-publish-project-alist
-        '(
-          ("blog/notes"
-           :base-directory "~/Workbench/org-blog/notes"
-           :publishing-directory "~/Workbench/org-blog/public_html"
-           :base-extension "org"
-           :publishing-function org-html-publish-to-html
-           :recursive t
-           :headline-levels 4
-           :section-number nil
-           :auto-sitemap t
-           :sitemap-filename "sitemap.org"
-           :sitemap-title "Sitemap"
-           )
-          ("blog/static"
-           :base-directory "~/Workbench/org-blog/static"
-           :publishing-directory "~/Workbench/org-blog/public_html"
-           :base-extension "css\\|js\\|png\\|jpg\\|gif\\|pdf\\|mp3\\|ogg\\|swf"
-           :recursive t
-           :publishing-function org-publish-attachment
-           )
-          ("blog" :components ("blog/notes" "blog/static"))
-          ))
+  ;; Tramp
+  (setq tramp-default-method "ssh")
+  (setq tramp-terminal-type "dumb")
+
+  ;; no line number in neotree buffer
+  (add-hook 'neotree-mode-hook
+            (lambda ()
+              (setq-local dotspacemacs-line-numbers nil)))
+
+  ;; indent guide
+  (indent-guide-global-mode)
+  (set-face-foreground 'indent-guide-face "lightgray")
+  (setq-default indent-guide-recursive t)
+
+  ;; git-commit
+  (global-git-commit-mode t)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
