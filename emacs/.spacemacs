@@ -47,6 +47,7 @@ values."
      javascript
      go
      latex
+     yaml
      gtags
      cscope
      (chinese :variables
