@@ -23,7 +23,10 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     auto-completion
+     (auto-completion :variables
+                      auto-completion-enable-snippets-in-popup t
+                      auto-completion-enable-help-tooltip t
+                      auto-completion-enable-sort-by-usage t)
      better-defaults
      (shell :variables
             shell-default-shell 'eshell
@@ -51,7 +54,6 @@ values."
      latex
      yaml
      gtags
-     cscope
      (chinese :variables
               chinese-enable-youdao-dict t)
      semantic
@@ -130,7 +132,7 @@ values."
                                :size 13
                                :weight normal
                                :width normal
-                               :powerline-scale 1.1)
+                               :powerline-scale 1.3)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The leader key accessible in `emacs state' and `insert state'
@@ -260,11 +262,11 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  (setq-default dotspacemacs-themes '(solarized-light leuven zenburn))
+  (setq-default dotspacemacs-themes '(leuven solarized-light))
   (setq ns-use-srgb-colorspace nil)
   (setq tramp-ssh-controlmaster-options
         "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
-  (setq-default git-magit-status-fullscreen t)
+  ;; (setq-default git-magit-status-fullscreen t)
   )
 
 (defun dotspacemacs/user-config ()
@@ -354,6 +356,20 @@ you should place you code here."
 
   ;; git-commit
   (global-git-commit-mode t)
+
+  ;; powerline
+  (setq powerline-default-separator 'zigzag)
+  (spaceline-compile)
+
+  ;; rtags
+  ;; (setq rtags-autostart-diagnostics t)
+  ;; (setq rtags-completions-enabled t)
+  ;; (push 'company-rtags company-backends)
+  ;; (setq rtags-use-helm t)
+
+  ;; company-mode
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 2)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
