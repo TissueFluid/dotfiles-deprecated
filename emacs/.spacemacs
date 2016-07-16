@@ -133,7 +133,7 @@ values."
                                :size 13
                                :weight normal
                                :width normal
-                               :powerline-scale 1.3)
+                               :powerline-scale 1.1)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The leader key accessible in `emacs state' and `insert state'
@@ -263,11 +263,10 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  (setq-default dotspacemacs-themes '(leuven solarized-light))
+  (setq-default dotspacemacs-themes '(sanityinc-tomorrow-eighties leuven))
   (setq ns-use-srgb-colorspace nil)
   (setq tramp-ssh-controlmaster-options
         "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
-  ;; (setq-default git-magit-status-fullscreen t)
   )
 
 (defun dotspacemacs/user-config ()
@@ -352,7 +351,7 @@ you should place you code here."
 
   ;; indent guide
   (indent-guide-global-mode)
-  (set-face-foreground 'indent-guide-face "lightgray")
+  ;; (set-face-foreground 'indent-guide-face "lightgray")
   (setq-default indent-guide-recursive t)
 
   ;; git-commit
@@ -360,7 +359,7 @@ you should place you code here."
 
   ;; powerline
   (setq powerline-default-separator 'zigzag)
-  (spaceline-compile)
+  ;; (spaceline-compile)
 
   ;; rtags
   ;; (setq rtags-autostart-diagnostics t)
